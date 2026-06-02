@@ -1,2 +1,3 @@
 .venv/
-app3.py 
+.env
+
