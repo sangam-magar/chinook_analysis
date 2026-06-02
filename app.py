@@ -37,6 +37,10 @@ df = pd.read_sql(query, engine)
 
 track_count_by_genre = df.groupby('genre_name').agg(num_tracks=('track_id', 'count')).reset_index()
 
+
+artist_name = df.groupby('artist_name')["track_id"].count().sort_values("media_type_id", ascending=False)
+art100 =artist_name.head(100)
+
 print(track_count_by_genre)
 
 fig, ax = plt.subplots()
@@ -49,4 +53,12 @@ artist = st.selectbox('Select an artist', df['artist_name'].unique())
 filtered_df = df[df['artist_name'] == artist]
 
 st.dataframe(filtered_df[['name', 'album_title', 'artist_name', 'genre_name']])
+
+
+#displaying top hundred media by its artist name 
+fig, ax1 =plt.subplots()
+sns.barplot( data = art100, x ="artist_name", y ="track_id", ax =ax1)
+st.pyplot(fig)
+
+
 
