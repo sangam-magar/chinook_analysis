@@ -14,6 +14,11 @@ DATABASE_URL = f"postgresql://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD
 
 engine = create_engine(DATABASE_URL)
 
+
+# DATABASE_URL = f"postgresql://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+
+# engine = create_engine(DATABASE_URL)
+
 query = """
     SELECT
         t."name" ,
@@ -41,7 +46,7 @@ query = """
         ON mt.media_type_id = t.media_type_id"""
 
 df = pd.read_sql(query, engine)
-df["minutes"] =df["milliseconds"] /60000 
+df["minutes"] =df["milliseconds"] /60000
 selected_genre = st.multiselect('Select the genre', df['genre_name'].unique(), default=df['genre_name'].unique())
 
 filtered_df = df[df['genre_name'].isin(selected_genre)]
