@@ -6,7 +6,7 @@ import seaborn as sns
 from sqlalchemy import create_engine
 import matplotlib.pyplot as plt 
 import streamlit as st
-import os
+import os 
 from dotenv import load_dotenv
 load_dotenv()
 
